@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax 테스트</title>
+</head>
+<body>
+<div id="here"></div>
+<button type="button" onclick="test()"></button>
+</body>
+
+<script>
+function test() {
+	  const xhttp = new XMLHttpRequest();
+	  xhttp.onload = function() {
+	    document.getElementById("here").innerHTML = this.responseText;
+	  }
+	  xhttp.open("GET", "ajax_info.txt");
+	  xhttp.send();
+	}
+</script>
+
+<script>
+async function test() {
+	
+	let FindReqDto = {
+			name: document.querySelector("#name").value,
+			birth: document.querySelector("#birth").value,
+			email: document.querySelector("#email").value,
+	};
+	
+	let response = await fetch("http://localhost:8080/user/id", {
+		method: "post",
+		body: JSON.stringify(FindReqDto),
+		headers: {
+			"Content-Type": "application/json; charset=utf-8"
+		}
+	});
+	
+	let parseResponse = await response.json();
+	}
+</script>
+
+</html>
